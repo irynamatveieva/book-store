@@ -47,7 +47,7 @@ public class BookSpecificationBuilder implements SpecificationBuilder<Book> {
         if (searchParameters.getCoverImages() != null
                 && searchParameters.getCoverImages().length > 0) {
             spec = spec.and(bookSpecificationProviderManager
-                    .getSpecificationProvider("cover_image")
+                    .getSpecificationProvider("coverImage")
                     .getSpecification(searchParameters.getCoverImages()));
         }
         return spec;

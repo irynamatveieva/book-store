@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 public class CoverImageSpecificationProvider implements SpecificationProvider<Book> {
     @Override
     public String getKey() {
-        return "cover_image";
+        return "coverImage";
     }
 
     @Override
     public Specification<Book> getSpecification(String[] params) {
         return (root, query, criteriaBuilder)
-                -> root.get("cover_image").in(Arrays.stream(params).toArray());
+                -> root.get("coverImage").in(Arrays.stream(params).toArray());
     }
 }
