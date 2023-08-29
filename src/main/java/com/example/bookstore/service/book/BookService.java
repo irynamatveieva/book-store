@@ -13,7 +13,7 @@ public interface BookService {
 
     List<BookDto> findAll(Pageable pageable);
 
-    void updateById(Long id, CreateBookRequestDto requestDto);
+    BookDto updateById(Long id, CreateBookRequestDto requestDto);
 
     void deleteById(Long id);
 
