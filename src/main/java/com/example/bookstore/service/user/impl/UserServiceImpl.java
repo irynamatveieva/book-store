@@ -8,7 +8,6 @@ import com.example.bookstore.model.Role;
 import com.example.bookstore.model.User;
 import com.example.bookstore.repository.role.RoleRepository;
 import com.example.bookstore.repository.user.UserRepository;
-import com.example.bookstore.service.shoppingcart.ShoppingCartService;
 import com.example.bookstore.service.user.UserService;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final ShoppingCartService shoppingCartService;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
@@ -42,7 +40,6 @@ public class UserServiceImpl implements UserService {
         defaultRoles.add(defaultRole);
         user.setRoles(defaultRoles);
         User savedUser = userRepository.save(user);
-        shoppingCartService.registerNewShoppingCart(savedUser);
         return userMapper.toDto(savedUser);
     }
 }
