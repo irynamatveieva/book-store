@@ -5,11 +5,14 @@ import com.example.bookstore.dto.shoppingcart.ShoppingCartDto;
 import com.example.bookstore.model.ShoppingCart;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 @Mapper(config = MapperConfig.class, uses = CartItemMapper.class)
 public interface ShoppingCartMapper {
-    @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "cartItems", target = "cartItems")
+    @Mappings({
+            @Mapping(source = "user.id", target = "userId"),
+            @Mapping(source = "cartItems", target = "cartItems")
+    })
     ShoppingCartDto toDto(ShoppingCart shoppingCart);
 
     @Mapping(source = "userId", target = "user.id")
