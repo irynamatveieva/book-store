@@ -15,6 +15,7 @@ import com.example.bookstore.service.shoppingcart.ShoppingCartService;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -31,19 +32,18 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    @Transactional
     public ShoppingCartDto addBookToTheShoppingCart(
             Long id, CreateCartItemRequestDto cartItemRequestDto) {
         ShoppingCart shoppingCart = getShoppingCartByUserId(id);
         CartItem cartItem = cartItemMapper.toEntity(cartItemRequestDto);
         cartItem.setShoppingCart(shoppingCart);
         cartItemRepository.save(cartItem);
-        Set<CartItem> cartItems = shoppingCart.getCartItems();
-        cartItems.add(cartItem);
-        shoppingCart.setCartItems(cartItems);
         return shoppingCartMapper.toDto(getShoppingCartByUserId(id));
     }
 
     @Override
+    @Transactional
     public CartItemDto updateCartItem(
             Long id, Long cartItemId, UpdateCartItemRequestDto cartItemRequestDto) {
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(
@@ -55,15 +55,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void removeCartItem(Long id, Long cartItemId) {
-        ShoppingCart shoppingCart = getShoppingCartByUserId(id);
+    @Transactional
+    public void removeCartItem(Long cartItemId) {
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(
-                () -> new RuntimeException("Can`t find cartItem by id" + id)
+                () -> new RuntimeException("Can`t find cartItem by id" + cartItemId)
         );
-        Set<CartItem> cartItems = shoppingCart.getCartItems();
-        cartItems.remove(cartItem);
         cartItemRepository.delete(cartItem);
-        shoppingCart.setCartItems(cartItems);
     }
 
     @Override

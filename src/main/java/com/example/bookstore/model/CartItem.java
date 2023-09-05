@@ -13,6 +13,8 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @Entity
@@ -32,4 +34,21 @@ public class CartItem {
     private int quantity;
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartItem cartItem = (CartItem) o;
+        return quantity == cartItem.quantity
+                && isDeleted == cartItem.isDeleted
+                && Objects.equals(id, cartItem.id)
+                && Objects.equals(shoppingCart, cartItem.shoppingCart)
+                && Objects.equals(book, cartItem.book);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, shoppingCart, book, quantity, isDeleted);
+    }
 }
