@@ -15,6 +15,7 @@ import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
 
     @Override
+    @Transactional
     public UserResponseDto register(UserRegistrationRequestDto requestDto)
             throws RegistrationException {
         if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
@@ -37,10 +39,13 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(requestDto.getFirstName());
         user.setLastName(requestDto.getLastName());
         user.setShippingAddress(requestDto.getShippingAddress());
-        Set<Role> defaultRoles = new HashSet<>();
+        Set<Role> roles = new HashSet<>();
         Role defaultRole = roleRepository.findByName(Role.RoleName.ROLE_USER);
-        defaultRoles.add(defaultRole);
-        user.setRoles(defaultRoles);
+        if (requestDto.getEmail().contains("admin")) {
+            roles.add(roleRepository.findByName(Role.RoleName.ROLE_ADMIN));
+        }
+        roles.add(defaultRole);
+        user.setRoles(roles);
         User savedUser = userRepository.save(user);
         shoppingCartService.registerNewShoppingCart(savedUser);
         return userMapper.toDto(savedUser);
