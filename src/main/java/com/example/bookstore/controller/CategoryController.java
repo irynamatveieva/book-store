@@ -31,6 +31,7 @@ public class CategoryController {
     private final CategoryService categoryService;
     private final BookService bookService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @Operation(summary = "Create a new category", description = "Create a new category")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -38,6 +39,7 @@ public class CategoryController {
         return categoryService.save(categoryDto);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     @Operation(summary = "Get all categories", description = "Get a list of all categories")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -45,6 +47,7 @@ public class CategoryController {
         return categoryService.findAll(pageable);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     @Operation(summary = "Get a category by id", description = "Get a category by id")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -69,6 +72,7 @@ public class CategoryController {
         categoryService.deleteById(id);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}/books")
     @Operation(summary = "Get books by category id",
             description = "Retrieve books by a specific category")

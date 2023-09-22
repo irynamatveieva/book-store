@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
     private final BookService bookService;
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     @Operation(summary = "Get all books", description = "Get a list of all available books")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -37,6 +38,7 @@ public class BookController {
         return bookService.findAll(pageable);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     @Operation(summary = "Get a book by id", description = "Get a book by id")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -44,6 +46,7 @@ public class BookController {
         return bookService.findById(id);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @Operation(summary = "Create a new book", description = "Create a new book")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -68,6 +71,7 @@ public class BookController {
         bookService.deleteById(id);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/search")
     @Operation(summary = "Search books by parameters",
             description = "Get a list of books by the entered parameters")
