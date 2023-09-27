@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     @Operation(summary = "Get a shopping cart by user", description = "Get a shopping cart by user")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -38,6 +39,7 @@ public class ShoppingCartController {
         return shoppingCartService.getShoppingCart(user.getId());
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PostMapping
     @Operation(summary = "Add book", description = "Add book to the shopping cart")
     @PreAuthorize("hasRole('ROLE_USER')")

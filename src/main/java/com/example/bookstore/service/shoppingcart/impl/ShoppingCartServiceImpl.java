@@ -4,6 +4,7 @@ import com.example.bookstore.dto.cartitem.CartItemDto;
 import com.example.bookstore.dto.cartitem.CreateCartItemRequestDto;
 import com.example.bookstore.dto.cartitem.UpdateCartItemRequestDto;
 import com.example.bookstore.dto.shoppingcart.ShoppingCartDto;
+import com.example.bookstore.exception.EntityNotFoundException;
 import com.example.bookstore.mapper.CartItemMapper;
 import com.example.bookstore.mapper.ShoppingCartMapper;
 import com.example.bookstore.model.CartItem;
@@ -46,7 +47,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public CartItemDto updateCartItem(
             Long id, Long cartItemId, UpdateCartItemRequestDto cartItemRequestDto) {
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(
-                () -> new RuntimeException("Can`t find cartItem by id" + id)
+                () -> new EntityNotFoundException("Can`t find cartItem by id" + cartItemId)
         );
         cartItem.setQuantity(cartItemRequestDto.getQuantity());
         CartItem savedCartItem = cartItemRepository.save(cartItem);
@@ -57,7 +58,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Transactional
     public void removeCartItem(Long cartItemId) {
         CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(
-                () -> new RuntimeException("Can`t find cartItem by id" + cartItemId)
+                () -> new EntityNotFoundException("Can`t find cartItem by id" + cartItemId)
         );
         cartItemRepository.delete(cartItem);
     }
@@ -71,6 +72,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     private ShoppingCart getShoppingCartByUserId(Long id) {
         return shoppingCartRepository.findShoppingCartByUserId(id)
-                .orElseThrow(() -> new RuntimeException("Can`t find shopping cart by id"));
+                .orElseThrow(() -> new EntityNotFoundException("Can`t find shopping cart by id"));
     }
 }
