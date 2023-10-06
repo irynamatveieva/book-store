@@ -1,0 +1,84 @@
+Authentication Controller:
+/register(POST):
+{
+  "email": "john.doe@example.com",
+  "password": "securePassword123",
+  "repeatPassword": "securePassword123",
+  "firstName": "John",
+  "lastName": "Doe",
+  "shippingAddress": "123 Main St, City, Country"
+}
+/login(POST):
+{
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}
+
+Book Controller:
+/books(GET)
+/books/{bookId}(GET)
+/books(POST):
+{
+  "title": "Title",
+  "author": "Author",
+  "isbn": "0-596-52068-9",
+  "price": 19.99,
+  "description": "description",
+  "coverImage": "https://example.com/cover-image.jpg"
+}
+/books/{bookId}(PUT)
+{
+  "title": "Updated Title",
+  "author": "Updated Author",
+  "isbn": "0-596-52068-9",
+  "price": 19.99,
+  "description": "Updated description",
+  "coverImage": "https://example.com/updated-cover-image.jpg"
+}
+/books/{bookId}(DELETE)
+/books/search?fromPrice=10&toPrice=30(GET)
+
+Category Controller:
+/categories(POST):
+{
+    "name": "category name",
+    "description": "category description"
+}
+/categories(GET)
+/categories/{id}(GET)
+/categories/{id}(PUT):
+{
+    "name": "updated category name",
+    "description": "updated category description"
+}
+/categories/{id}(DELETE)
+/categories/{id}/books(GET)
+
+Order Controller:
+/orders(POST):
+{
+    "shippingAddress": "shippingAddress"
+}
+/orders(GET)
+/orders/{id}(PUT):
+{
+    "status": "DELIVERED"
+}
+/orders/{orderId}/items(GET)
+/orders/{orderId}/items/{itemId}(GET)
+
+Shopping Cart Controller:
+/cart(GET)
+/cart(POST):
+{
+    "bookId": 1,
+    "quantity": 3
+}
+/cart/cart-items/{cartItemId}(PUT):
+{
+    "quantity": 2
+}
+/cart/cart-items/{cartItemId}(DELETE)
+
+
+
