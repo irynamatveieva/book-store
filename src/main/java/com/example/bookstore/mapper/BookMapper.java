@@ -19,7 +19,7 @@ public interface BookMapper {
     BookDtoWithoutCategoryIds toDtoWithoutCategories(Book book);
 
     @AfterMapping
-    default void setCategoryIds(@MappingTarget BookDto bookDto, Book book) {
+    default void setCategories(@MappingTarget BookDto bookDto, Book book) {
         bookDto.setCategories(book.getCategories());
     }
 

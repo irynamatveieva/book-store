@@ -20,7 +20,7 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-    image: posts-service
+    image: book-store
     build: .
     env_file: ./.env
     ports:

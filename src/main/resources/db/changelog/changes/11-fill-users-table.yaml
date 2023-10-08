@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: fill-users-table
+      author: irynamatveieva
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: email
+                  value: "admin@example.com"
+              - column:
+                  name: password
+                  value: "$2a$10$MOjuAIc7wE.O8NiXhA1h4OtdteBnerR7AxuvMxSjsEi8RkAODdCr6"
+              - column:
+                  name: first_name
+                  value: "John"
+              - column:
+                  name: last_name
+                  value: "Doe"
+              - column:
+                  name: shipping_address
+                  value: "admin address"

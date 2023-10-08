@@ -49,6 +49,8 @@ public class ShoppingCartControllerTest {
     @WithMockUser(username = "user", roles = {"USER"})
     @Test
     @Sql(scripts = {
+            "classpath:database/delete-from-users-table.sql",
+            "classpath:database/delete-from-users-roles-table.sql",
             "classpath:database/fill-shopping-carts-table.sql",
             "classpath:database/fill-cart-items-table.sql",
             "classpath:database/fill-users-table.sql",
@@ -82,6 +84,8 @@ public class ShoppingCartControllerTest {
     @WithMockUser(username = "user", roles = {"USER"})
     @Test
     @Sql(scripts = {
+            "classpath:database/delete-from-users-table.sql",
+            "classpath:database/delete-from-users-roles-table.sql",
             "classpath:database/fill-shopping-carts-table.sql",
             "classpath:database/fill-cart-items-table.sql",
             "classpath:database/fill-users-table.sql",
@@ -124,6 +128,8 @@ public class ShoppingCartControllerTest {
     @WithMockUser(username = "user", roles = {"USER"})
     @Test
     @Sql(scripts = {
+            "classpath:database/delete-from-users-table.sql",
+            "classpath:database/delete-from-users-roles-table.sql",
             "classpath:database/fill-shopping-carts-table.sql",
             "classpath:database/fill-cart-items-table.sql",
             "classpath:database/fill-users-table.sql",
@@ -162,6 +168,8 @@ public class ShoppingCartControllerTest {
     @WithMockUser(username = "user", roles = {"USER"})
     @Test
     @Sql(scripts = {
+            "classpath:database/delete-from-users-table.sql",
+            "classpath:database/delete-from-users-roles-table.sql",
             "classpath:database/fill-shopping-carts-table.sql",
             "classpath:database/fill-cart-items-table.sql",
             "classpath:database/fill-users-table.sql",
